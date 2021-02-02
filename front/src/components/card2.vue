@@ -2,7 +2,7 @@
   <v-card
     class="mx-auto"
     max-width="200"
-    style="width: 300px; margin: 45px; cursor: pointer"
+    style="width: 300px; margin: 20px; cursor: pointer"
   >
     <v-card-text>
       <p class="display-1 text--primary">
