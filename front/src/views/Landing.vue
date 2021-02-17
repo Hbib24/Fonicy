@@ -16,6 +16,7 @@
           type="text"
           class="form__field"
           placeholder="Email"
+          v-model="email"
           name="email"
           id="email"
           required
@@ -32,6 +33,7 @@
           placeholder="Password"
           name="password"
           id="password"
+          v-model="password"
           required
         />
         <label for="password" class="form__label">Password</label>
@@ -42,7 +44,9 @@
       >
         No account? <router-link to="/signup">Sign Up</router-link>
       </p>
-      <button class="btn">Sign In</button>
+      <button class="btn" v-on:click="validate(email, password)">
+        Sign In
+      </button>
     </div>
     <footer
       class="banner"
@@ -54,8 +58,30 @@
 </template>
 
 <script>
+import axios from "axios";
+let url = "http://localhost:3000";
 export default {
-  name: "Landing"
+  name: "Landing",
+  data: () => ({
+    email: "",
+    password: ""
+  }),
+  methods: {
+    validate(email, password) {
+      axios({
+        method: "POST",
+        url: url + "/api/user/login",
+        data: { email: email, password: password }
+      }).then(
+        (response) => {
+          console.log(response.data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+  }
 };
 </script>
 

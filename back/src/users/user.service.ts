@@ -25,15 +25,19 @@ export class UserService {
   }
 
   async login(attempt: LoginDto) {
-    let user = await this.userModel.findOne({ email: attempt.email });
+    if (!attempt.email || !attempt.password) return { message: 'missing data' };
 
     // fetching user
+    let user = await this.userModel.findOne({ email: attempt.email });
+
     if (!user) return { message: 'user does not exist', exists: false };
 
     // comparing passwords
     let isValid = await bcrypt.compare(attempt.password, user.password);
 
-    if (isValid) return { username: user.username, email: user.email };
+    if (isValid) {
+      return { user: { username: user.username, email: user.email } };
+    }
     return { message: 'password is not valid', exists: true };
   }
 }

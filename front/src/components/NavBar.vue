@@ -1,11 +1,9 @@
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+  <img src="../assets/logo.png" />
 </template>
 
 <script>
 export default {
-  name: "App"
+  name: "NavBar"
 };
 </script>
